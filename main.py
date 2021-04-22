@@ -196,13 +196,5 @@ def in_progress_task(task_id):
     return redirect(url_for('check_list'))
 
 
-@app.route('/share')
-@login_required
-def share_to_user():
-    print(request.select.select.first_selected_option.text)
-    print(request.select[''])
-    return redirect(url_for('check_list'))
-
-
 if __name__ == "__main__":
     app.run(debug=True)
