@@ -1,0 +1,48 @@
+.form-row {
+margin-top:150px;}
+
+.info_about_website {
+}
+
+body {
+    height: 100%;
+}
+
+h1 { font-family: "Allerta Stencil"; font-size: 42px; font-style: italic; font-variant: small-caps; font-weight: 700; line-height: 42px; }
+h3 { font-family: "Allerta Stencil"; font-size: 14px; font-style: normal; font-variant: normal; font-weight: 700; line-height: 15.4px; }
+p { font-family: "Allerta Stencil"; font-size: 14px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 20px; }
+blockquote { font-family: "Allerta Stencil"; font-size: 21px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 30px; }
+pre { font-family: "Allerta Stencil"; font-size: 13px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 18.5714px; }
+
+footer {
+    position: fixed;
+    height: 50px;
+    bottom: 0;
+    width: 100%;
+}
+
+.make_list {
+color:black;
+margin-top:100px;}
+
+.strikethrough{
+  text-decoration:line-through;
+  color: green;
+}
+
+.in_progress{
+color: orange;}
+
+.register-form {
+   height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-img {
+margin-top: 60px;
+height: 100%;
+display: flex;
+justify-content: center;
+align-items: center;}

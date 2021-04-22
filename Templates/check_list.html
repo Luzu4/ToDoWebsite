@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ToDo! ;)</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/styles.css')}}">
+
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Allerta+Stencil" />
+
+
+
+</head>
+<body>
+<nav class="navbar navbar-dark bg-primary fixed-top">
+  <a class="navbar-brand" href="{{url_for('home')}}">
+    <img src="https://cdn.pixabay.com/photo/2020/01/21/18/39/todo-4783676_1280.png" width="90" height="50" class="d-inline-block align-top" alt="">
+  </a>
+
+<form method="post">
+  <div class="form-group">
+        {{ form1.csrf_token }}
+        {{form1.user_to_share(size=50)}}
+          <button type="submit" class="btn btn-danger">share</button>
+  </div>
+
+</form>
+
+    <form class="form-inline">
+        <a class="btn btn-danger mr-1" type="button" href="{{url_for('logout')}}">Logout</a>
+    </form>
+</nav>
+<form method="post">
+<div class="form-group make_list">
+    <div class="input-group input-group-lg ml-3">
+        {{ form.csrf_token }}
+        {{form.task(size=100)}}
+<button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</div>
+</form>
+<p class="ml-3">Those tasks are yours:</p>
+{% for task in all_tasks %}
+    {% if task.author_id|int == user_id|int %}
+        <div class="ml-3">
+        <form class="form-inline">
+            <a class="btn-sm btn-success mr-3 mt-1" href="{{url_for('complete_task', task_id=task.id)}}">Done</a>
+            <a class="btn-sm btn-warning mr-3 mt-1" href="{{url_for('in_progress_task', task_id=task.id)}}">In Progress</a>
+            <a class="btn-sm btn-danger mr-3" href="{{url_for('delete_task' , task_id=task.id)}}">Remove</a>
+            {% if task.done|int == 1 %}
+            <h3 class="strikethrough">{{task.text}}</h3>
+            {%endif%}
+            {% if task.done|int == 0 %}
+            {% if task.progress|int == 1 %}
+            <h3 class="in_progress">{{task.text}}</h3>
+            {%endif%}
+            {% if task.progress|int == 0 %}
+            <h3>{{task.text}}</h3>
+            {%endif%}
+            {%endif%}
+
+            </form>
+        </div>
+    {% endif %}
+{% endfor %}
+{% if shared_ids != None %}
+
+{% for shared_id in shared_ids %}
+    {%for people in all_users %}
+    {% if people.id|int == shared_id|int%}
+    <p class="ml-3 mt-3"> This tasks list is from {{people.name}}:</p>
+    {%endif%}
+    {%endfor%}
+    {% for task in all_tasks %}
+        {% if task.author_id|int == shared_id|int %}
+            <div class="ml-3">
+            <form class="form-inline">
+                <a class="btn-sm btn-success mr-3 mt-1" href="{{url_for('complete_task', task_id=task.id)}}">Done</a>
+                <a class="btn-sm btn-warning mr-3 mt-1" href="{{url_for('in_progress_task', task_id=task.id)}}">In Progress</a>
+                <a class="btn-sm btn-danger mr-3" href="{{url_for('delete_task' , task_id=task.id)}}">Remove</a>
+                {% if task.done|int == 1 %}
+                <h3 class="strikethrough">{{task.text}}</h3>
+                {%endif%}
+                {% if task.done|int == 0 %}
+                {% if task.progress|int == 1 %}
+                <h3 class="in_progress">{{task.text}}</h3>
+                {%endif%}
+                {% if task.progress|int == 0 %}
+                <h3>{{task.text}}</h3>
+                {%endif%}
+                {%endif%}
+
+                </form>
+            </div>
+        {% endif %}
+    {% endfor %}
+{% endfor %}
+{% endif %}
+
+<div style="margin-top: 40px" id="console-event"></div>
+<footer class="page-footer font-small bg-primary">
+    <div class="footer-copyright text-center py-3 text-white sticky-bottom">
+        © 2021 Copyright: Luz
+    </div>
+</footer>
+</body>
+</html>

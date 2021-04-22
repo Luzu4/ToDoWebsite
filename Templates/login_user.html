@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ToDo! ;)</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/styles.css')}}">
+
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Allerta+Stencil" />
+
+{% import 'bootstrap/wtf.html' as wtf %}
+
+
+</head>
+<body>
+<nav class="navbar navbar-dark bg-primary fixed-top">
+  <a class="navbar-brand" href="{{url_for('home')}}">
+    <img src="https://cdn.pixabay.com/photo/2020/01/21/18/39/todo-4783676_1280.png" width="90" height="50" class="d-inline-block align-top" alt="">
+  </a>
+
+</nav>
+<div class="login-img">
+<img src="https://thumbs.dreamstime.com/b/przycisk-logowania-znak-izolowany-zaokr%C4%85glony-login-logowanie-158486012.jpg" width="200" height="150">
+    </div>
+<div style="text-align: center;">
+{% with messages = get_flashed_messages() %}
+    {% for message in messages %}
+        {% if message %}
+           <p class="error"><strong>{{message}}</strong></p>
+        {% endif %}
+    {% endfor %}
+{% endwith %}
+    </div>
+<div class="ml-3 register-form" style="text-align: center;">
+{{ckeditor.load()}}
+{{ckeditor.config(name='body')}}
+{{wtf.quick_form(form, novalidate=True, button_map={"Submit":"primary"})}}
+</div>
+<div id="console-event"></div>
+<footer class="page-footer font-small bg-primary">
+    <div class="footer-copyright text-center py-3 text-white sticky-bottom">
+        © 2021 Copyright: Luz
+    </div>
+</footer>
+
+
+</body>
+</html>
